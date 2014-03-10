@@ -23,14 +23,12 @@
     self.locationManager.delegate = self;
 
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
-    CLBeaconMajorValue major = 65424;
-    CLBeaconMinorValue minor = 34082;
+    CLBeaconMajorValue major = 42176;
+    CLBeaconMinorValue minor = 34023;
     NSString *regionIdentifier = @"com.example.identifier.ibeacon";
     self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid major:major minor:minor identifier:regionIdentifier];
     
-    // Est censé réveiller l'application même si elle n'est pas lancée (mais pas réussi à le faire fonctionner).
-    // Dans tous les cas, ça lance bien didDetermineState quand on allume l'écran et que l'application
-    // est en veille (et même quand l'écran est éteint), mais rien quand l'application est fermée.
+    // Permet de réveiller l'application même si elle n'est pas lancée (ne fonctionne pas avec iOS 7.0, OK avec iOS 7.1).
     self.beaconRegion.notifyEntryStateOnDisplay = YES;
     
     // Démarre le monitoring des régions définies
